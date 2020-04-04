@@ -1,0 +1,24 @@
+<https://rubicure-opendata.sastudio.jp/rubicure-schema.ttl#Precure> a <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property>;
+  <http://www.w3.org/2000/01/rdf-schema#label> "プリキュア";
+  <http://www.w3.org/2000/01/rdf-schema#comment> "プリキュア" .
+<https://rubicure-opendata.sastudio.jp/rubicure-schema.ttl#name> a <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property>;
+  <http://www.w3.org/2000/01/rdf-schema#label> "名前";
+  <http://www.w3.org/2000/01/rdf-schema#comment> "プリキュアに変身する前の名前" .
+<https://rubicure-opendata.sastudio.jp/rubicure-schema.ttl#humanName> a <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property>;
+  <http://www.w3.org/2000/01/rdf-schema#label> "名前(変身前)";
+  <http://www.w3.org/2000/01/rdf-schema#comment> "プリキュアに変身する前の名前" .
+<https://rubicure-opendata.sastudio.jp/rubicure-schema.ttl#precureName> a <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property>;
+  <http://www.w3.org/2000/01/rdf-schema#label> "名前(プリキュア)";
+  <http://www.w3.org/2000/01/rdf-schema#comment> "プリキュアに変身した後の名前" .
+<https://rubicure-opendata.sastudio.jp/rubicure-schema.ttl#castName> a <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property>;
+  <http://www.w3.org/2000/01/rdf-schema#label> "声の出演";
+  <http://www.w3.org/2000/01/rdf-schema#comment> "声の出演、もしくは声優" .
+<https://rubicure-opendata.sastudio.jp/rubicure-schema.ttl#color> a <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property>;
+  <http://www.w3.org/2000/01/rdf-schema#label> "色";
+  <http://www.w3.org/2000/01/rdf-schema#comment> "プリキュアのイメージカラー(キュアぱず登場プリキュアはキュアぱず準拠)" .
+<https://rubicure-opendata.sastudio.jp/rubicure-schema.ttl#createdDate> a <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property>;
+  <http://www.w3.org/2000/01/rdf-schema#label> "初登場";
+  <http://www.w3.org/2000/01/rdf-schema#comment> "本放送で初登場した日" .
+<https://rubicure-opendata.sastudio.jp/rubicure-schema.ttl#birthday> a <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property>;
+  <http://www.w3.org/2000/01/rdf-schema#label> "誕生日";
+  <http://www.w3.org/2000/01/rdf-schema#comment> "誕生日" .
