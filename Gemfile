@@ -8,3 +8,8 @@ gem "rdf-turtle"
 gem "rubicure"
 gem "sinatra"
 gem "slim"
+
+group :test do
+  gem "rack-test"
+  gem "rspec"
+end
