@@ -1,0 +1,10 @@
+version: '3'
+services:
+  web:
+    build: .
+    tty: true
+    stdin_open: true
+    ports:
+      - '4567:4567'
+    volumes:
+      - .:/usr/src/rubicure-opendata
