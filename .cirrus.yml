@@ -1,0 +1,9 @@
+rspec_task:
+  container:
+    matrix:
+      dockerfile: ci/ruby2.7/Dockerfile
+  bundle_cache:
+    folder: /usr/local/bundle
+    fingerprint_script: echo $RUBY_VERSION && cat Gemfile.lock
+    populate_script: bundle install
+  rspec_script: bundle exec rspec
