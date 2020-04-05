@@ -5,4 +5,9 @@ describe "rubicure-opendata Application" do
     get '/'
     expect(last_response).to be_ok
   end
+
+  it "should allow accessing the sparql endpoint" do
+    get '/sparql'
+    expect(last_response).to be_ok
+  end
 end
