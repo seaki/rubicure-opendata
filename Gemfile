@@ -8,6 +8,7 @@ gem "rdf-turtle"
 gem "rubicure"
 gem "sinatra"
 gem "slim"
+gem "sparql"
 
 group :test do
   gem "rack-test"
