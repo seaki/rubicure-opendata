@@ -1,5 +1,3 @@
-require 'byebug'
-
 module Rack
   class HandleHtmlCharset
     def initialize(app)
