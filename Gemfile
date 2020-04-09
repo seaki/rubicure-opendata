@@ -15,6 +15,8 @@ group :test do
   gem "rack-test"
   gem "rspec"
 end
+
 group :development, :test do
   gem "byebug"
+  gem "shotgun"
 end
