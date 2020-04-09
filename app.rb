@@ -1,7 +1,10 @@
-require 'rdf'
-require 'rdf/turtle'
-require 'rubicure'
 require 'sinatra'
+
+require File.expand_path 'lib/rack/handle_html_charset.rb', File.dirname(__FILE__)
+use Rack::HandleHtmlCharset
+
+require 'linkeddata'
+require 'rubicure'
 require 'sinatra/sparql'
 require 'slim'
 
