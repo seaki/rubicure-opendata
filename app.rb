@@ -43,18 +43,18 @@ end
 
 def precure
   schema = RDF::Vocabulary.new("https://rubicure-rdf.sastudio.jp/rubicure-schema.ttl#")
-  precure = RDF::Vocabulary.new("https://rubicure-rdf.sastudio.jp/rdfs/precure/")
+  prefix = RDF::Vocabulary.new("https://rubicure-rdf.sastudio.jp/rdfs/precure/")
 
   graph = RDF::Graph.new
 
   Precure.all_girls.each do |girl|
-    s = precure[girl.girl_name]
+    s = prefix[girl.girl_name]
     p = RDF.type
     o = schema["Precure"]
 
     graph << RDF::Statement.new(s, p, o)
 
-    s = precure[girl.girl_name]
+    s = prefix[girl.girl_name]
     p = RDF::RDFS.label
     o = girl.precure_name
 
@@ -62,7 +62,7 @@ def precure
 
     %w[human_name precure_name cast_name color created_date birthday].each do |m|
       next unless girl.send(m)
-      s = precure[girl.girl_name]
+      s = prefix[girl.girl_name]
       p = schema[m.camelize]
       o = girl.send(m)
 
