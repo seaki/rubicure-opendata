@@ -28,6 +28,7 @@ def endpoint
   settings.sparql_options.replace(standard_prefixes: true)
   repository = RDF::Repository.new do |graph|
     graph << precure
+    graph << series
   end
   if params["query"]
     query = params["query"].to_s.match(/^http:/) ? RDF::Util::File.open_file(params["query"]) : ::URI.decode(params["query"].to_s)
