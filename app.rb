@@ -81,7 +81,7 @@ def series
 
   graph = RDF::Graph.new
 
-  Rubicure::Series.names.each do |name|
+  Rubicure::Series.uniq_names.each do |name|
     series = Rubicure::Series.find(name)
 
     s = prefix[name]
