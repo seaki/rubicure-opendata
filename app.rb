@@ -16,6 +16,33 @@ get '/' do
   slim :index
 end
 
+get '/precure:ext?' do
+  get_graph("precure", params['ext'])
+end
+
+get '/series:ext?' do
+  get_graph("series", params['ext'])
+end
+
+get '/movies:ext?' do
+  get_graph("movies", params['ext'])
+end
+
+def get_graph(graph_name, ext)
+  schema = RDF::Vocabulary.new("https://rubicure-rdf.sastudio.jp/rubicure-schema.ttl#")
+  prefix = RDF::Vocabulary.new("https://rubicure-rdf.sastudio.jp/rdfs/#{graph_name}/")
+
+  ext = ext.gsub('.', '') unless ext.nil?
+  # follow content negotiation if no extension specified
+  return self.send(graph_name) if ext.nil?
+
+  RDF::Writer.for(ext.to_sym).buffer(
+  {standard_prefixes: true, prefixes: {rubicure: schema.to_uri}}
+  ) do |w|
+    w << self.send(graph_name)
+  end
+end
+
 get '/sparql' do
   endpoint
 end
