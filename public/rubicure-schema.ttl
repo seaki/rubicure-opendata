@@ -22,3 +22,21 @@
 <https://rubicure-opendata.sastudio.jp/rubicure-schema.ttl#birthday> a <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property>;
   <http://www.w3.org/2000/01/rdf-schema#label> "誕生日";
   <http://www.w3.org/2000/01/rdf-schema#comment> "誕生日" .
+<https://rubicure-opendata.sastudio.jp/rubicure-schema.ttl#Series> a <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property>;
+  <http://www.w3.org/2000/01/rdf-schema#label> "シリーズ";
+  <http://www.w3.org/2000/01/rdf-schema#comment> "「ふたりはプリキュア」など、各シリーズに関する情報" .
+<https://rubicure-opendata.sastudio.jp/rubicure-schema.ttl#title> a <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property>;
+  <http://www.w3.org/2000/01/rdf-schema#label> "タイトル";
+  <http://www.w3.org/2000/01/rdf-schema#comment> "シリーズや映画のタイトル" .
+<https://rubicure-opendata.sastudio.jp/rubicure-schema.ttl#startedDate> a <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property>;
+  <http://www.w3.org/2000/01/rdf-schema#label> "開始日";
+  <http://www.w3.org/2000/01/rdf-schema#comment> "放送開始日(TVシリーズ)、公開日(映画)" .
+<https://rubicure-opendata.sastudio.jp/rubicure-schema.ttl#endedDate> a <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property>;
+  <http://www.w3.org/2000/01/rdf-schema#label> "終了日";
+  <http://www.w3.org/2000/01/rdf-schema#comment> "放送終了日(TVシリーズ)" .
+<https://rubicure-opendata.sastudio.jp/rubicure-schema.ttl#girls> a <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property>;
+  <http://www.w3.org/2000/01/rdf-schema#label> "プリキュア";
+  <http://www.w3.org/2000/01/rdf-schema#comment> "作品に登場するプリキュア" .
+<https://rubicure-opendata.sastudio.jp/rubicure-schema.ttl#Movies> a <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property>;
+  <http://www.w3.org/2000/01/rdf-schema#label> "映画";
+  <http://www.w3.org/2000/01/rdf-schema#comment> "「映画 プリキュアオールスターズDX みんなともだちっ☆奇跡の全員大集合!」など、各映画に関する情報" .
