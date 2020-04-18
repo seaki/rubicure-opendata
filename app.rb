@@ -61,7 +61,7 @@ def precure
     graph << RDF::Statement.new(s, p, o)
 
     %w[human_name precure_name cast_name color created_date birthday].each do |m|
-      next unless girl.send(m)
+      next unless girl.respond_to?(m)
       s = prefix[girl.girl_name]
       p = schema[m.camelize]
       o = girl.send(m)
