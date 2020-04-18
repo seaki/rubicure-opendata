@@ -29,6 +29,7 @@ def endpoint
   repository = RDF::Repository.new do |graph|
     graph << precure
     graph << series
+    graph << movies
   end
   if params["query"]
     query = params["query"].to_s.match(/^http:/) ? RDF::Util::File.open_file(params["query"]) : ::URI.decode(params["query"].to_s)
@@ -106,6 +107,49 @@ def series
     end
 
     series.girls.each do |girl|
+      s = prefix[name]
+      p = schema["Precure"]
+      o = prefix_precure[girl.girl_name]
+
+      graph << RDF::Statement.new(s, p, o)
+    end
+  end
+
+  graph
+end
+
+def movies
+  schema = RDF::Vocabulary.new("https://rubicure-rdf.sastudio.jp/rubicure-schema.ttl#")
+  prefix = RDF::Vocabulary.new("https://rubicure-rdf.sastudio.jp/rdfs/movies/")
+  prefix_precure = RDF::Vocabulary.new("https://rubicure-rdf.sastudio.jp/rdfs/precure/")
+
+  graph = RDF::Graph.new
+
+  Rubicure::Movie.uniq_names.each do |name|
+    movie = Rubicure::Movie.find(name)
+
+    s = prefix[name]
+    p = RDF.type
+    o = schema["Movies"]
+
+    graph << RDF::Statement.new(s, p, o)
+
+    s = prefix[name]
+    p = RDF::RDFS.label
+    o = movie.title
+
+    graph << RDF::Statement.new(s, p, o)
+
+    %w[title started_date ended_date].each do |m|
+      next unless movie.respond_to?(m) && movie.send(m)
+      s = prefix[name]
+      p = schema[m.camelize]
+      o = movie.send(m)
+
+      graph << RDF::Statement.new(s, p, o)
+    end
+
+    Precure.all_stars(name).each do |girl|
       s = prefix[name]
       p = schema["Precure"]
       o = prefix_precure[girl.girl_name]
