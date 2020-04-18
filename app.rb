@@ -62,7 +62,7 @@ def precure
     graph << RDF::Statement.new(s, p, o)
 
     %w[human_name precure_name cast_name color created_date birthday].each do |m|
-      next unless girl.respond_to?(m)
+      next unless girl.respond_to?(m) && girl.send(m)
       s = prefix[girl.girl_name]
       p = schema[m.camelize]
       o = girl.send(m)
@@ -96,7 +96,7 @@ def series
     graph << RDF::Statement.new(s, p, o)
 
     %w[title started_date ended_date].each do |m|
-      next unless series.respond_to?(m)
+      next unless series.respond_to?(m) && series.send(m)
       s = prefix[name]
       p = schema[m.camelize]
       o = series.send(m)
