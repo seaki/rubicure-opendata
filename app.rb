@@ -72,3 +72,45 @@ def precure
 
   graph
 end
+
+def series
+  schema = RDF::Vocabulary.new("https://rubicure-rdf.sastudio.jp/rubicure-schema.ttl#")
+  prefix = RDF::Vocabulary.new("https://rubicure-rdf.sastudio.jp/rdfs/series/")
+
+  graph = RDF::Graph.new
+
+  Rubicure::Series.names.each do |name|
+    series = Rubicure::Series.find(name)
+
+    s = prefix[name]
+    p = RDF.type
+    o = schema["Series"]
+
+    graph << RDF::Statement.new(s, p, o)
+
+    s = prefix[name]
+    p = RDF::RDFS.label
+    o = series.title
+
+    graph << RDF::Statement.new(s, p, o)
+
+    %w[title started_date ended_date].each do |m|
+      next unless series.respond_to?(m)
+      s = prefix[name]
+      p = schema[m.camelize]
+      o = series.send(m)
+
+      graph << RDF::Statement.new(s, p, o)
+    end
+
+    series.girls.each do |girl|
+      s = prefix[series.series_name]
+      p = schema["Precure"]
+      o = girl.girl_name
+
+      graph << RDF::Statement.new(s, p, o)
+    end
+  end
+
+  graph
+end
