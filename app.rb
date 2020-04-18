@@ -17,6 +17,14 @@ get '/' do
 end
 
 get '/sparql' do
+  endpoint
+end
+
+post '/sparql' do
+  endpoint
+end
+
+def endpoint
   settings.sparql_options.replace(standard_prefixes: true)
   repository = RDF::Repository.new do |graph|
     graph << precure
