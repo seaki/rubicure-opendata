@@ -9,5 +9,34 @@ html
         p
             a href="https://rubygems.org/gems/rubicure" Powered by rubicure.
         form method='get' action='/sparql'
-            textarea name="query" cols="80" rows="10"
-            input type="submit" value="Run Query"
+            p
+                textarea name="query" cols="80" rows="10"
+            p
+                input type="submit" value="Run Query"
+
+        h2 CureSPARQL
+        form method='get' action='/sparql'
+            p
+                textarea name="query" cols="80" rows="10"
+                    == "PREFIX precure: <https://rubicure-rdf.sastudio.jp/rdfs/precure/>\n"
+                    == "PREFIX schema: <https://rubicure-rdf.sastudio.jp/rubicure-schema.ttl#>\n"
+                    == "SELECT ?p ?o WHERE {precure:cure_sparkle ?p ?o}"
+            p
+                input type="submit" value="Run Query"
+
+        h2 Federated Query is not supported
+        p This query does not work
+        form method='post' action='/sparql'
+            p
+                textarea name="query" cols="80" rows="10"
+                    == "PREFIX imas: <https://sparql.crssnky.xyz/imasrdf/URIs/imas-schema.ttl#>\n"
+                    == "PREFIX precure: <https://rubicure-rdf.sastudio.jp/rubicure-schema.ttl#>\n"
+                    == "SELECT distinct (?precure_cv as ?cv) {\n"
+                    == "    service<https://sparql.crssnky.xyz/spql/imas/query>{\n"
+                    == "        ?imas imas:cv ?imas_cv.\n"
+                    == "    }\n"
+                    == "    ?precure precure:CastName ?precure_cv.\n"
+                    == "    filter((str(?precure_cv)=str(?imas_cv)))\n"
+                    == "}\n"
+            p
+                input type="submit" value="Run Query"
