@@ -77,6 +77,7 @@ end
 def series
   schema = RDF::Vocabulary.new("https://rubicure-rdf.sastudio.jp/rubicure-schema.ttl#")
   prefix = RDF::Vocabulary.new("https://rubicure-rdf.sastudio.jp/rdfs/series/")
+  prefix_precure = RDF::Vocabulary.new("https://rubicure-rdf.sastudio.jp/rdfs/precure/")
 
   graph = RDF::Graph.new
 
@@ -105,9 +106,9 @@ def series
     end
 
     series.girls.each do |girl|
-      s = prefix[series.series_name]
+      s = prefix[name]
       p = schema["Precure"]
-      o = girl.girl_name
+      o = prefix_precure[girl.girl_name]
 
       graph << RDF::Statement.new(s, p, o)
     end
