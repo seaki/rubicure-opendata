@@ -24,6 +24,21 @@ html
             p
                 input type="submit" value="Run Query"
 
+        h2 Get Precure name from Maho Girls Precure!
+        form method='get' action='/sparql'
+            p
+                textarea name="query" cols="80" rows="10"
+                    == "PREFIX schema: <https://rubicure-rdf.sastudio.jp/rubicure-schema.ttl#>\n"
+                    == "PREFIX precure: <https://rubicure-rdf.sastudio.jp/rdfs/precure/>\n"
+                    == "PREFIX series: <https://rubicure-rdf.sastudio.jp/rdfs/series/>\n"
+                    == "SELECT ?precure_name\n"
+                    == "WHERE {\n"
+                    == "  series:maho_girls schema:Precure ?precure.\n"
+                    == "  ?precure schema:PrecureName ?precure_name.\n"
+                    == "}"
+            p
+                input type="submit" value="Run Query"
+
         h2 Federated Query is not supported
         p This query does not work
         form method='post' action='/sparql'
