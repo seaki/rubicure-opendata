@@ -18,8 +18,8 @@ html
         form method='get' action='/sparql'
             p
                 textarea name="query" cols="80" rows="10"
-                    == "PREFIX precure: <https://rubicure-rdf.sastudio.jp/rdfs/precure/>\n"
                     == "PREFIX schema: <https://rubicure-rdf.sastudio.jp/rubicure-schema.ttl#>\n"
+                    == "PREFIX precure: <https://rubicure-rdf.sastudio.jp/rdfs/precure/>\n"
                     == "SELECT ?p ?o WHERE {precure:cure_sparkle ?p ?o}"
             p
                 input type="submit" value="Run Query"
