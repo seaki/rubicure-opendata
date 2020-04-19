@@ -43,6 +43,21 @@ def get_graph(graph_name, ext)
   end
 end
 
+get '/rdfs/:predicate/:subject' do
+  graph = RDF::Graph.new
+
+  case params['predicate']
+  when 'precure' then
+    get_girl(graph, Cure.send(params['subject']))
+  when 'series' then
+    get_series(graph, params['subject'].to_sym)
+  when 'movies' then
+    get_movie(graph, params['subject'].to_sym)
+  end
+
+  graph
+end
+
 get '/sparql' do
   endpoint
 end
