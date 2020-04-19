@@ -71,119 +71,131 @@ def endpoint
 end
 
 def precure
-  schema = RDF::Vocabulary.new("https://rubicure-rdf.sastudio.jp/rubicure-schema.ttl#")
-  prefix = RDF::Vocabulary.new("https://rubicure-rdf.sastudio.jp/rdfs/precure/")
-
   graph = RDF::Graph.new
 
   Precure.all_girls.each do |girl|
-    s = prefix[girl.girl_name]
-    p = RDF.type
-    o = schema["Precure"]
-
-    graph << RDF::Statement.new(s, p, o)
-
-    s = prefix[girl.girl_name]
-    p = RDF::RDFS.label
-    o = girl.precure_name
-
-    graph << RDF::Statement.new(s, p, o)
-
-    %w[human_name precure_name cast_name color created_date birthday].each do |m|
-      next unless girl.respond_to?(m) && girl.send(m)
-      s = prefix[girl.girl_name]
-      p = schema[m.camelize]
-      o = girl.send(m)
-
-      graph << RDF::Statement.new(s, p, o)
-    end
+    get_girl(graph, girl)
   end
 
   graph
 end
 
+def get_girl(graph, girl)
+  schema = RDF::Vocabulary.new("https://rubicure-rdf.sastudio.jp/rubicure-schema.ttl#")
+  prefix = RDF::Vocabulary.new("https://rubicure-rdf.sastudio.jp/rdfs/precure/")
+
+  s = prefix[girl.girl_name]
+  p = RDF.type
+  o = schema["Precure"]
+
+  graph << RDF::Statement.new(s, p, o)
+
+  s = prefix[girl.girl_name]
+  p = RDF::RDFS.label
+  o = girl.precure_name
+
+  graph << RDF::Statement.new(s, p, o)
+
+  %w[human_name precure_name cast_name color created_date birthday].each do |m|
+    next unless girl.respond_to?(m) && girl.send(m)
+    s = prefix[girl.girl_name]
+    p = schema[m.camelize]
+    o = girl.send(m)
+
+    graph << RDF::Statement.new(s, p, o)
+  end
+end
+
 def series
+  graph = RDF::Graph.new
+
+  Rubicure::Series.uniq_names.each do |name|
+    get_series(graph, name)
+  end
+
+  graph
+end
+
+def get_series(graph, name)
   schema = RDF::Vocabulary.new("https://rubicure-rdf.sastudio.jp/rubicure-schema.ttl#")
   prefix = RDF::Vocabulary.new("https://rubicure-rdf.sastudio.jp/rdfs/series/")
   prefix_precure = RDF::Vocabulary.new("https://rubicure-rdf.sastudio.jp/rdfs/precure/")
 
+  series = Rubicure::Series.find(name)
+
+  s = prefix[name]
+  p = RDF.type
+  o = schema["Series"]
+
+  graph << RDF::Statement.new(s, p, o)
+
+  s = prefix[name]
+  p = RDF::RDFS.label
+  o = series.title
+
+  graph << RDF::Statement.new(s, p, o)
+
+  %w[title started_date ended_date].each do |m|
+    next unless series.respond_to?(m) && series.send(m)
+    s = prefix[name]
+    p = schema[m.camelize]
+    o = series.send(m)
+
+    graph << RDF::Statement.new(s, p, o)
+  end
+
+  series.girls.each do |girl|
+    s = prefix[name]
+    p = schema["Precure"]
+    o = prefix_precure[girl.girl_name]
+
+    graph << RDF::Statement.new(s, p, o)
+  end
+end
+
+def movies
   graph = RDF::Graph.new
 
-  Rubicure::Series.uniq_names.each do |name|
-    series = Rubicure::Series.find(name)
-
-    s = prefix[name]
-    p = RDF.type
-    o = schema["Series"]
-
-    graph << RDF::Statement.new(s, p, o)
-
-    s = prefix[name]
-    p = RDF::RDFS.label
-    o = series.title
-
-    graph << RDF::Statement.new(s, p, o)
-
-    %w[title started_date ended_date].each do |m|
-      next unless series.respond_to?(m) && series.send(m)
-      s = prefix[name]
-      p = schema[m.camelize]
-      o = series.send(m)
-
-      graph << RDF::Statement.new(s, p, o)
-    end
-
-    series.girls.each do |girl|
-      s = prefix[name]
-      p = schema["Precure"]
-      o = prefix_precure[girl.girl_name]
-
-      graph << RDF::Statement.new(s, p, o)
-    end
+  Rubicure::Movie.uniq_names.each do |name|
+    get_movie(graph, name)
   end
 
   graph
 end
 
-def movies
+def get_movie(graph, name)
   schema = RDF::Vocabulary.new("https://rubicure-rdf.sastudio.jp/rubicure-schema.ttl#")
   prefix = RDF::Vocabulary.new("https://rubicure-rdf.sastudio.jp/rdfs/movies/")
   prefix_precure = RDF::Vocabulary.new("https://rubicure-rdf.sastudio.jp/rdfs/precure/")
 
-  graph = RDF::Graph.new
+  movie = Rubicure::Movie.find(name)
 
-  Rubicure::Movie.uniq_names.each do |name|
-    movie = Rubicure::Movie.find(name)
+  s = prefix[name]
+  p = RDF.type
+  o = schema["Movies"]
 
+  graph << RDF::Statement.new(s, p, o)
+
+  s = prefix[name]
+  p = RDF::RDFS.label
+  o = movie.title
+
+  graph << RDF::Statement.new(s, p, o)
+
+  %w[title started_date ended_date].each do |m|
+    next unless movie.respond_to?(m) && movie.send(m)
     s = prefix[name]
-    p = RDF.type
-    o = schema["Movies"]
+    p = schema[m.camelize]
+    o = movie.send(m)
 
     graph << RDF::Statement.new(s, p, o)
-
-    s = prefix[name]
-    p = RDF::RDFS.label
-    o = movie.title
-
-    graph << RDF::Statement.new(s, p, o)
-
-    %w[title started_date ended_date].each do |m|
-      next unless movie.respond_to?(m) && movie.send(m)
-      s = prefix[name]
-      p = schema[m.camelize]
-      o = movie.send(m)
-
-      graph << RDF::Statement.new(s, p, o)
-    end
-
-    Precure.all_stars(name).each do |girl|
-      s = prefix[name]
-      p = schema["Precure"]
-      o = prefix_precure[girl.girl_name]
-
-      graph << RDF::Statement.new(s, p, o)
-    end
   end
 
-  graph
+  Precure.all_stars(name).each do |girl|
+    s = prefix[name]
+    p = schema["Precure"]
+    o = prefix_precure[girl.girl_name]
+
+    graph << RDF::Statement.new(s, p, o)
+  end
 end
