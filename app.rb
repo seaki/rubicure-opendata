@@ -74,7 +74,7 @@ def endpoint
     graph << movies
   end
   if params["query"]
-    query = params["query"].to_s.match(/^http:/) ? RDF::Util::File.open_file(params["query"]) : ::URI.decode(params["query"].to_s)
+    query = params["query"].to_s.match(/^http:/) ? RDF::Util::File.open_file(params["query"]) : ::URI.decode_www_form_component(params["query"].to_s)
     SPARQL.execute(query, repository)
   else
     settings.sparql_options.merge!(prefixes: {
