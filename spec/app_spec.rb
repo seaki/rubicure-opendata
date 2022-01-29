@@ -16,4 +16,11 @@ describe "rubicure-opendata Application" do
     post '/sparql'
     expect(last_response).to be_ok
   end
+
+  it "should return Turtle when negotiated" do
+    header 'Accept', 'text/turtle'
+    get '/sparql', :query => 'SELECT ?s ?p ?o WHERE {?s ?p ?o.}'
+    expect(last_response).to be_ok
+    # byebug
+  end
 end
