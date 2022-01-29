@@ -1,0 +1,22 @@
+version: '3'
+services:
+  mutagen:
+    image: alpine:latest
+    entrypoint:
+      - tail
+      - -f
+      - /dev/null
+    container_name: rubicure-turtle
+    stop_grace_period: 0s
+    volumes:
+      - code:/code
+  web:
+    build: .
+    tty: true
+    stdin_open: true
+    volumes:
+      - code:/usr/src/rubicure-turtle
+
+# Create a volume to store and share synchronized code.
+volumes:
+  code:
