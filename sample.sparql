@@ -1,0 +1,24 @@
+PREFIX precure: <https://rubicure-rdf.sastudio.jp/rdfs/precure/>
+PREFIX schema: <https://rubicure-rdf.sastudio.jp/rubicure-schema.ttl#>
+SELECT ?p ?o WHERE {precure:cure_sparkle ?p ?o}
+
+
+PREFIX imas: <https://sparql.crssnky.xyz/imasrdf/URIs/imas-schema.ttl#>
+PREFIX precure: <https://rubicure-rdf.sastudio.jp/rubicure-schema.ttl#>
+SELECT distinct (?precure_cv as ?cv) {
+    service<https://sparql.crssnky.xyz/spql/imas/query>{
+        ?imas imas:cv ?imas_cv.
+    }
+    ?precure precure:CastName ?precure_cv.
+    filter((str(?precure_cv)=str(?imas_cv)))
+}
+
+PREFIX imas: <https://sparql.crssnky.xyz/imasrdf/URIs/imas-schema.ttl#>
+PREFIX precure: <https://rubicure-rdf.sastudio.jp/rubicure-schema.ttl#>
+SELECT distinct (?precure_cv as ?cv) {
+    ?imas imas:cv ?imas_cv.
+    service<https://rubicure-opendata.herokuapp.com/sparql>{
+        ?precure precure:CastName ?precure_cv.
+    }
+    filter((str(?precure_cv)=str(?imas_cv)))
+}
