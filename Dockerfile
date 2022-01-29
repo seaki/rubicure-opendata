@@ -1,4 +1,4 @@
-FROM ruby:2.7.2-alpine3.11
+FROM ruby:2.7.5-alpine3.15
 
 ENV LANG C.UTF-8
 ENV APP_ROOT /usr/src/rubicure-opendata
