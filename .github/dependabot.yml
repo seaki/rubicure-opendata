@@ -8,3 +8,23 @@ updates:
   directory: "/"
   schedule:
     interval: daily
+- package-ecosystem: docker
+  directory: "/ci/ruby2.7"
+  schedule:
+    interval: daily
+  ignore:
+  - dependency-name: ruby
+    versions:
+    - ">= 2.8"
+- package-ecosystem: docker
+  directory: "/ci/ruby3.0"
+  schedule:
+    interval: daily
+  ignore:
+  - dependency-name: ruby
+    versions:
+    - ">= 3.1"
+- package-ecosystem: docker
+  directory: "/ci/ruby3.1"
+  schedule:
+    interval: daily
