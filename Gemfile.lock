@@ -96,7 +96,7 @@ GEM
       rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
-    rdf (3.2.7)
+    rdf (3.2.8)
       link_header (~> 0.0, >= 0.0.8)
     rdf-aggregate-repo (3.2.0)
       rdf (~> 3.2)
@@ -151,7 +151,7 @@ GEM
     rdf-trix (3.2.0)
       rdf (~> 3.2)
       rdf-xsd (~> 3.2)
-    rdf-turtle (3.2.0)
+    rdf-turtle (3.2.1)
       ebnf (~> 2.3)
       rdf (~> 3.2)
     rdf-vocab (3.2.0)
