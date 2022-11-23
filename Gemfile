@@ -12,6 +12,7 @@ gem "rubicure"
 gem "sinatra"
 gem "slim"
 gem "sparql"
+gem "thin"
 
 group :test do
   gem "rack-test"
