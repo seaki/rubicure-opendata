@@ -10,7 +10,7 @@ COPY Gemfile ${APP_ROOT}/Gemfile
 COPY Gemfile.lock ${APP_ROOT}/Gemfile.lock
 
 RUN apk add --update --no-cache --virtual=.build-dependencies build-base && \
-apk add --update --no-cache tzdata && \
+apk add --update --no-cache tzdata libc6-compat && \
 gem install bundler -v 2.3.6 && \
 bundle install && \
 apk del .build-dependencies
