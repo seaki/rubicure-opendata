@@ -33,7 +33,7 @@ GEM
     htmlentities (4.3.4)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
-    json-canonicalization (0.3.2)
+    json-canonicalization (0.4.0)
     json-ld (3.2.5)
       htmlentities (~> 4.3)
       json-canonicalization (~> 0.3, >= 0.3.2)
