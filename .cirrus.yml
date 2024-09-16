@@ -1,7 +1,6 @@
 rspec_task:
   container:
     matrix:
-      dockerfile: ci/ruby3.0/Dockerfile
       dockerfile: ci/ruby3.1/Dockerfile
       dockerfile: ci/ruby3.2/Dockerfile
       dockerfile: ci/ruby3.3/Dockerfile
