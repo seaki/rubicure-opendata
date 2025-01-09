@@ -4,7 +4,7 @@ source "https://rubygems.org"
 
 git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 
-ruby '>= 2.7.5'
+ruby '>= 3.1'
 
 gem "linkeddata"
 gem "rdf-turtle"
@@ -13,6 +13,7 @@ gem "sinatra"
 gem "slim"
 gem "sparql"
 gem "thin"
+gem "csv"
 
 group :test do
   gem "rack-test"
