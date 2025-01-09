@@ -1,4 +1,4 @@
-FROM ruby:3.3.6-alpine3.20
+FROM ruby:3.4.1-alpine3.20
 
 ENV LANG C.UTF-8
 ENV APP_ROOT /usr/src/rubicure-opendata
@@ -11,7 +11,6 @@ COPY Gemfile.lock ${APP_ROOT}/Gemfile.lock
 
 RUN apk add --update --no-cache --virtual=.build-dependencies build-base && \
 apk add --update --no-cache tzdata libc6-compat && \
-gem install bundler -v 2.3.6 && \
 bundle install && \
 apk del .build-dependencies
 
