@@ -1,7 +1,7 @@
 FROM ruby:3.4.2-alpine3.20
 
-ENV LANG C.UTF-8
-ENV APP_ROOT /usr/src/rubicure-opendata
+ENV LANG=C.UTF-8
+ENV APP_ROOT=/usr/src/rubicure-opendata
 
 RUN mkdir ${APP_ROOT}
 WORKDIR ${APP_ROOT}
