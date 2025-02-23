@@ -12,7 +12,7 @@ gem "rubicure"
 gem "sinatra"
 gem "slim"
 gem "sparql"
-gem "thin"
+gem "puma"
 gem "csv"
 gem "activesupport", "<8.0"
 

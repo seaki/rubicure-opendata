@@ -24,7 +24,6 @@ GEM
     concurrent-ruby (1.3.5)
     connection_pool (2.5.0)
     csv (3.3.2)
-    daemons (1.4.1)
     date (3.4.1)
     diff-lcs (1.5.1)
     drb (2.2.1)
@@ -34,7 +33,6 @@ GEM
       scanf (~> 1.0)
       sxp (~> 1.3)
       unicode-types (~> 1.8)
-    eventmachine (1.2.7)
     haml (6.3.0)
       temple (>= 0.8.2)
       thor
@@ -101,6 +99,7 @@ GEM
       ruby2_keywords (~> 0.0.1)
     net-http-persistent (4.0.5)
       connection_pool (~> 2.2)
+    nio4r (2.7.4)
     nokogiri (1.18.3)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
@@ -108,6 +107,8 @@ GEM
       date
       stringio
     public_suffix (6.0.1)
+    puma (6.6.0)
+      nio4r (~> 2.0)
     racc (1.8.1)
     rack (2.2.11)
     rack-protection (3.2.0)
@@ -243,10 +244,6 @@ GEM
       matrix (~> 0.4)
       rdf (~> 3.3)
     temple (0.10.3)
-    thin (1.8.2)
-      daemons (~> 1.0, >= 1.0.9)
-      eventmachine (~> 1.0, >= 1.0.4)
-      rack (>= 1, < 3)
     thor (1.3.2)
     tilt (2.5.0)
     tzinfo (2.0.6)
@@ -266,6 +263,7 @@ DEPENDENCIES
   byebug
   csv
   linkeddata
+  puma
   rack-test
   rdf-turtle
   rspec
@@ -274,7 +272,6 @@ DEPENDENCIES
   sinatra
   slim
   sparql
-  thin
 
 RUBY VERSION
    ruby 3.1.2p20
