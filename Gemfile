@@ -14,7 +14,7 @@ gem "slim"
 gem "sparql"
 gem "puma"
 gem "csv"
-gem "activesupport", "<8.0"
+gem "activesupport", "<9.0"
 
 group :test do
   gem "rack-test"
