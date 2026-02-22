@@ -40,12 +40,13 @@ GEM
       tilt
     hamster (3.0.0)
       concurrent-ruby (~> 1.0)
-    hashie (5.0.0)
+    hashie (5.1.0)
+      logger
     htmlentities (4.3.4)
     i18n (1.14.8)
       concurrent-ruby (~> 1.0)
     io-console (0.8.1)
-    json (2.18.0)
+    json (2.18.1)
     json-canonicalization (1.0.0)
     json-ld (3.3.2)
       htmlentities (~> 4.3)
@@ -108,7 +109,7 @@ GEM
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
     ostruct (0.6.3)
-    prism (1.7.0)
+    prism (1.9.0)
     psych (5.2.6)
       date
       stringio
@@ -216,7 +217,7 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.13.0)
     rspec-support (3.13.6)
-    rubicure (4.1.5)
+    rubicure (4.1.6)
       activesupport (>= 5.0.0)
       hashie (>= 2.0.5)
       sengiri_yaml (>= 1.0.0)
