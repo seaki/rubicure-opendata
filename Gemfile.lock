@@ -287,7 +287,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activesupport (< 9.0)
+  activesupport
   byebug
   csv
   linkeddata
@@ -301,9 +301,6 @@ DEPENDENCIES
   sinatra
   slim
   sparql
-
-RUBY VERSION
-   ruby 3.1.2p20
 
 BUNDLED WITH
    2.6.2
