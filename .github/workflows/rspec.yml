@@ -2,9 +2,9 @@ name: RSpec
 
 on:
   push:
-    branches: [master, ruby-3.1]
+    branches: [master, ruby-3.0]
   pull_request:
-    branches: [master, ruby-3.1]
+    branches: [master, ruby-3.0]
 
 permissions:
   contents: read
@@ -17,7 +17,7 @@ jobs:
       fail-fast: false
       matrix:
         # Each entry is a directory under ci/ whose Dockerfile pins the Ruby image (kept up to date by Dependabot)
-        ruby: [ruby3.1]
+        ruby: [ruby3.0]
     steps:
       - uses: actions/checkout@v7
 
