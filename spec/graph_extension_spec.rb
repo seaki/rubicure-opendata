@@ -4,6 +4,7 @@ describe "graphs requested with a file extension" do
   {
     'ttl' => 'text/turtle',
     'nt' => 'application/n-triples',
+    'jsonld' => 'application/ld+json',
     'rdf' => 'application/rdf+xml',
   }.each do |ext, content_type|
     it "serves /precure.#{ext} as #{content_type}" do
