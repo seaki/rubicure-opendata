@@ -33,7 +33,7 @@ describe "SPARQL endpoint" do
   it "returns 400 for a malformed query" do
     get '/sparql', query: 'SELECT WHERE {'
     expect(last_response.status).to eq 400
-    expect(last_response.body).to include 'syntax error'
+    expect(last_response.body).to include 'ERROR [line: 1]'
   end
 
   it "does not fetch a query from a URL" do
