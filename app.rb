@@ -46,14 +46,23 @@ end
 
 get '/rdfs/:predicate/:subject' do
   graph = RDF::Graph.new
+  subject = params['subject']
 
+  # look names up in rubicure's own lists so that unknown names give 404
+  # and the name is never used as a method name
   case params['predicate']
   when 'precure' then
-    get_girl(graph, Cure.send(params['subject']))
+    girl = Precure.all_girls.find { |g| g.girl_name == subject }
+    halt 404 unless girl
+    get_girl(graph, girl)
   when 'series' then
-    get_series(graph, params['subject'].to_sym)
+    halt 404 unless Rubicure::Series.uniq_names.map(&:to_s).include?(subject)
+    get_series(graph, subject.to_sym)
   when 'movies' then
-    get_movie(graph, params['subject'].to_sym)
+    halt 404 unless Rubicure::Movie.uniq_names.map(&:to_s).include?(subject)
+    get_movie(graph, subject.to_sym)
+  else
+    halt 404
   end
 
   graph
