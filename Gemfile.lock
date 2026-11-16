@@ -46,6 +46,7 @@ GEM
     htmlentities (4.4.2)
     i18n (1.14.8)
       concurrent-ruby (~> 1.0)
+    json (2.21.2)
     json-canonicalization (0.4.0)
     json-ld (3.2.5)
       htmlentities (~> 4.3)
@@ -272,6 +273,7 @@ DEPENDENCIES
   activesupport
   byebug
   csv
+  json (< 3)
   linkeddata
   puma
   rack-test
