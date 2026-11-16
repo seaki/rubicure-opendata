@@ -35,4 +35,11 @@ describe "SPARQL endpoint" do
     expect(last_response.status).to eq 400
     expect(last_response.body).to include 'syntax error'
   end
+
+  it "does not fetch a query from a URL" do
+    # a URL is not a SPARQL query; it must be rejected without any request being made to it
+    expect(RDF::Util::File).not_to receive(:open_file)
+    get '/sparql', query: 'http://127.0.0.1:9/query.rq'
+    expect(last_response.status).to eq 400
+  end
 end
