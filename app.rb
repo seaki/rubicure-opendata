@@ -32,13 +32,14 @@ def get_graph(graph_name, ext)
   schema = RDF::Vocabulary.new("https://rubicure-rdf.sastudio.jp/rubicure-schema.ttl#")
   prefix = RDF::Vocabulary.new("https://rubicure-rdf.sastudio.jp/rdfs/#{graph_name}/")
 
-  ext = ext.gsub('.', '') unless ext.nil?
   # follow content negotiation if no extension specified
   return self.send(graph_name) if ext.nil?
 
-  RDF::Writer.for(ext.to_sym).buffer(
-  {standard_prefixes: true, prefixes: {rubicure: schema.to_uri}}
-  ) do |w|
+  format = RDF::Format.for(file_extension: ext.delete('.').to_sym)
+  halt 404 if format.nil? || format.writer.nil?
+
+  content_type format.content_type.first
+  format.writer.buffer(standard_prefixes: true, prefixes: {rubicure: schema.to_uri}) do |w|
     w << self.send(graph_name)
   end
 end
