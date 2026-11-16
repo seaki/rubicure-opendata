@@ -47,6 +47,7 @@ GEM
     i18n (1.14.8)
       concurrent-ruby (~> 1.0)
     io-console (0.9.5)
+    json (2.21.2)
     json-canonicalization (1.0.0)
     json-ld (3.3.2)
       htmlentities (~> 4.3)
@@ -97,7 +98,7 @@ GEM
     logger (1.7.0)
     matrix (0.4.3)
     minitest (5.26.1)
-    multi_json (1.19.1)
+    multi_json (1.17.0)
     mustermann (3.1.1)
     mutex_m (0.3.0)
     net-http-persistent (4.0.8)
@@ -275,6 +276,7 @@ DEPENDENCIES
   activesupport
   byebug
   csv
+  json (< 3)
   linkeddata
   puma
   rack-test
