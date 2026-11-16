@@ -85,7 +85,11 @@ def endpoint
   end
   if params["query"]
     query = params["query"].to_s.match(/^http:/) ? RDF::Util::File.open_file(params["query"]) : ::URI.decode_www_form_component(params["query"].to_s)
-    SPARQL.execute(query, repository)
+    begin
+      SPARQL.execute(query, repository)
+    rescue SPARQL::MalformedQuery => e
+      halt 400, {'Content-Type' => 'text/plain;charset=utf-8'}, e.message
+    end
   else
     settings.sparql_options.merge!(prefixes: {
       ssd: "http://www.w3.org/ns/sparql-service-description#",
