@@ -32,27 +32,37 @@ def get_graph(graph_name, ext)
   schema = RDF::Vocabulary.new("https://rubicure-rdf.sastudio.jp/rubicure-schema.ttl#")
   prefix = RDF::Vocabulary.new("https://rubicure-rdf.sastudio.jp/rdfs/#{graph_name}/")
 
-  ext = ext.gsub('.', '') unless ext.nil?
   # follow content negotiation if no extension specified
   return self.send(graph_name) if ext.nil?
 
-  RDF::Writer.for(ext.to_sym).buffer(
-  {standard_prefixes: true, prefixes: {rubicure: schema.to_uri}}
-  ) do |w|
+  format = RDF::Format.for(file_extension: ext.delete('.').to_sym)
+  halt 404 if format.nil? || format.writer.nil?
+
+  content_type format.content_type.first
+  format.writer.buffer(standard_prefixes: true, prefixes: {rubicure: schema.to_uri}) do |w|
     w << self.send(graph_name)
   end
 end
 
 get '/rdfs/:predicate/:subject' do
   graph = RDF::Graph.new
+  subject = params['subject']
 
+  # look names up in rubicure's own lists so that unknown names give 404
+  # and the name is never used as a method name
   case params['predicate']
   when 'precure' then
-    get_girl(graph, Cure.send(params['subject']))
+    girl = Precure.all_girls.find { |g| g.girl_name == subject }
+    halt 404 unless girl
+    get_girl(graph, girl)
   when 'series' then
-    get_series(graph, params['subject'].to_sym)
+    halt 404 unless Rubicure::Series.uniq_names.map(&:to_s).include?(subject)
+    get_series(graph, subject.to_sym)
   when 'movies' then
-    get_movie(graph, params['subject'].to_sym)
+    halt 404 unless Rubicure::Movie.uniq_names.map(&:to_s).include?(subject)
+    get_movie(graph, subject.to_sym)
+  else
+    halt 404
   end
 
   graph
@@ -74,8 +84,12 @@ def endpoint
     graph << movies
   end
   if params["query"]
-    query = params["query"].to_s.match(/^http:/) ? RDF::Util::File.open_file(params["query"]) : ::URI.decode_www_form_component(params["query"].to_s)
-    SPARQL.execute(query, repository)
+    query = ::URI.decode_www_form_component(params["query"].to_s)
+    begin
+      SPARQL.execute(query, repository)
+    rescue SPARQL::MalformedQuery => e
+      halt 400, {'Content-Type' => 'text/plain;charset=utf-8'}, e.message
+    end
   else
     settings.sparql_options.merge!(prefixes: {
       ssd: "http://www.w3.org/ns/sparql-service-description#",
