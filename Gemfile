@@ -14,6 +14,8 @@ gem "sparql"
 gem "puma"
 gem "csv"
 gem "activesupport"
+# json-ld 3.3.2 cannot write JSON-LD with json 3.x
+gem "json", "< 3"
 
 group :test do
   gem "rack-test"
